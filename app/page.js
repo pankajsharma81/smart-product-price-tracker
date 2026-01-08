@@ -1,65 +1,93 @@
+import AddProductForm from "@/components/AddProductForm";
+import { Button } from "@/components/ui/button";
+import { Bell, LogIn, Rabbit, Shield } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
+  const user = null;
+  const products = [];
+
+  const FEATURES = [
+    {
+      icon: Rabbit,
+      title: "Lightning Fast",
+      description:
+        "Deal Drop extracts prices in seconds, handling JavaScript and dynamic content",
+    },
+    {
+      icon: Shield,
+      title: "Always Reliable",
+      description:
+        "Works across all major e-commerce sites with built-in anti-bot protection",
+    },
+    {
+      icon: Bell,
+      title: "Smart Alerts",
+      description: "Get notified instantly when prices drop below your target",
+    },
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <main className="min-h-screen bg-linear-to-br from-orange-50 via-white to-orange-50">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-3">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              src={"/deal-drop-logo.png"}
+              alt="Deal Drop Logo"
+              width={600}
+              height={200}
+              className="h-10 w-auto"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </div>
+
+          {/* Auth Button */}
+          <Button
+            variant="default"
+            size="sm"
+            className="bg-orange-500 hover:bg-orange-600 gap-2"
           >
-            Documentation
-          </a>
+            <LogIn className="w-4 h-4" />
+            Sign In
+          </Button>
         </div>
-      </main>
-    </div>
+      </header>
+
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-6 py-2 rounded-full text-sm font-medium mb-6">
+            Made with ❤️ by Pankaj Sharma
+          </div>
+          <h2 className="text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+            Never Miss the Best Price
+          </h2>
+          <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+            Monitor prices across any e-commerce platform and get real-time
+            alerts when prices drop. Never overpay again.
+          </p>
+
+          {/* Add Product Form */}
+          <AddProductForm user={user} />
+
+          {/* Features */}
+          {products.length === 0 && (
+            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-16">
+              {FEATURES.map(({ icon: Icon, title, description }) => (
+                <div
+                  key={title}
+                  className="bg-white p-6 rounded-xl border border-gray-200"
+                >
+                  <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                    <Icon className="w-6 h-6 text-orange-500" />
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">{title}</h3>
+                  <p className="text-sm text-gray-600">{description}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    </main>
   );
 }
