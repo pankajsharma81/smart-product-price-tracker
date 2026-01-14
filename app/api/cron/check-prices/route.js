@@ -8,7 +8,7 @@ export async function GET() {
   });
 }
 
-export async function POST() {
+export async function POST(request) {
   try {
     const authHeader = request.headers.get("authorization");
     const cronSecret = process.env.CRON_SECRET;
@@ -114,5 +114,4 @@ export async function POST() {
     );
   }
 }
-// curl -X POST https://dealdrop.vercel.app/api/cron/check-prices \
-// -H "Authorization: Bearer your_cron_secret_here"
+// curl.exe -X POST http:/localhost:3000/api/cron/check-prices -H "Authorization: Bearer 388d6ac651c492272a8a0a8777f329e460519044ea9c29dafff9bcd51d2ae0cb"
