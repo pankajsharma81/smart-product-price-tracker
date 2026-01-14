@@ -1,7 +1,7 @@
 import { sendPriceDropAlert } from "@/lib/email";
 import { scrapeProduct } from "@/lib/firecrawl";
+import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
-
 export async function GET() {
   return NextResponse.json({
     message: "Price check cron route works! Use this to trigger price checks.",
@@ -114,6 +114,5 @@ export async function POST() {
     );
   }
 }
-
-// curl -/X POST https://dealdrop.vercel.app/api/cron/check-prices \
+// curl -X POST https://dealdrop.vercel.app/api/cron/check-prices \
 // -H "Authorization: Bearer your_cron_secret_here"
