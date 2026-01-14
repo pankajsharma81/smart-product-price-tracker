@@ -1,3 +1,4 @@
+import { sendPriceDropAlert } from "@/lib/email";
 import { scrapeProduct } from "@/lib/firecrawl";
 import { NextResponse } from "next/server";
 
@@ -77,6 +78,16 @@ export async function POST() {
 
             if (user?.email) {
               // Send email alert
+              const emailResult = await sendPriceDropAlert(
+                user.email,
+                product,
+                oldPrice,
+                newPrice
+              );
+
+              if (emailResult.success) {
+                results.alertsSent++;
+              }
             }
           }
         }
@@ -103,3 +114,6 @@ export async function POST() {
     );
   }
 }
+
+// curl -/X POST https://dealdrop.vercel.app/api/cron/check-prices \
+// -H "Authorization: Bearer your_cron_secret_here"
